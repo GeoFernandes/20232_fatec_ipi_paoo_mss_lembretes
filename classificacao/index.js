@@ -19,6 +19,21 @@ const funcoes = {
         payload: observacao
       }
     )
+  },
+  LembreteCriado: async (lembrete) => {
+    if(lembrete.texto.toLowerCase() != 'importante' && 'urgente') {
+      lembrete.texto = 'comum';
+    }
+    if(lembrete.texto.toLowerCase() === 'importante') {
+      lembrete.texto = 'importante';
+    } else {
+      lembrete.texto = 'urgente';
+    }
+    await axios.post('http://localhost:10000/eventos',
+      {
+        type: 'LembreteClassificado',
+        payload: lembrete.texto
+      })
   }
 }
 
